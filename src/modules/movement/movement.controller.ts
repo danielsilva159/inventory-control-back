@@ -1,34 +1,38 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { MovementService } from './movement.service';
-import { CreateMovementDto } from './dto/create-movement.dto';
-import { UpdateMovementDto } from './dto/update-movement.dto';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 
-@Controller('movement')
-export class MovementController {
-  constructor(private readonly movementService: MovementService) {}
+import { CreateMovementDto } from './dto/create-movement.dto';
+import { MovementsService } from './movement.service';
+
+@Controller('movements')
+export class MovementsController {
+  constructor(private readonly movementsService: MovementsService) {}
 
   @Post()
-  create(@Body() createMovementDto: CreateMovementDto) {
-    return this.movementService.create(createMovementDto);
+  create(
+    @Body()
+    dto: CreateMovementDto,
+  ) {
+    return this.movementsService.create(dto);
   }
 
   @Get()
   findAll() {
-    return this.movementService.findAll();
+    return this.movementsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.movementService.findOne(+id);
+  findOne(
+    @Param('id')
+    id: string,
+  ) {
+    return this.movementsService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMovementDto: UpdateMovementDto) {
-    return this.movementService.update(+id, updateMovementDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.movementService.remove(+id);
+  @Get('product/:productId')
+  findByProduct(
+    @Param('productId')
+    productId: string,
+  ) {
+    return this.movementsService.findByProduct(productId);
   }
 }

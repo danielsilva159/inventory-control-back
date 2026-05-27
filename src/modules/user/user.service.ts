@@ -74,4 +74,13 @@ export class UserService {
       message: 'Usuário removido com sucesso',
     };
   }
+
+  async findByEmail(email: string) {
+    return this.usersRepository.findOne({
+      where: {
+        email,
+      },
+      select: ['id', 'email', 'password', 'name'],
+    });
+  }
 }

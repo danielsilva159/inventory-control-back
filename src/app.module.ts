@@ -11,6 +11,7 @@ import { Product } from './modules/product/entities/product.entity';
 import { User } from './modules/user/entities/user.entity';
 import { Category } from './modules/category/entities/category.entity';
 import { Movement } from './modules/movement/entities/movement.entity';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { Movement } from './modules/movement/entities/movement.entity';
       synchronize: true,
     }),
     MovementModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
